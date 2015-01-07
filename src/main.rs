@@ -3,11 +3,7 @@ struct Monster {
     strength: i32,
 }
 
-trait Attack {
-    fn attack(&self, target: Monster) -> Monster;
-}
-
-impl Attack for Monster {
+impl Monster {
     fn attack(&self, target: Monster) -> Monster {
         Monster {
             health: target.health - self.strength,
