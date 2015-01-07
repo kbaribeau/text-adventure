@@ -1,5 +1,3 @@
-extern crate regex;
-
 struct Monster {
     health: i32,
     strength: i32,
