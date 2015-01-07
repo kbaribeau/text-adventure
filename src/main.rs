@@ -4,12 +4,15 @@ struct Monster {
 }
 
 trait Attack {
-    fn attack(&self, target: &mut Monster);
+    fn attack(&self, target: Monster) -> Monster;
 }
 
 impl Attack for Monster {
-    fn attack(&self, target: &mut Monster) {
-        target.health -= self.strength;
+    fn attack(&self, target: Monster) -> Monster {
+        Monster {
+            health: target.health - self.strength,
+            strength: target.strength
+        }
     }
 }
 
@@ -19,12 +22,12 @@ fn main() {
         strength: 10
     };
 
-    let enemy = &mut Monster {
+    let enemy = Monster {
         health: 25,
         strength: 1
     };
 
     println!("the enemy's health is {}", enemy.health);
-    hero.attack(enemy);
-    println!("the enemy's health is {}", enemy.health);
+    let damaged_enemy = hero.attack(enemy);
+    println!("the enemy's health is {}", damaged_enemy.health);
 }
